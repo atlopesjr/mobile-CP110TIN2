@@ -13,7 +13,7 @@ function CustomNavigationBar({ navigation, previous}) {
   return (
     <Appbar.Header>
       {previous ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
-      <Appbar.Content title="Frete App" />
+      <Appbar.Content title="Frete app" />
     </Appbar.Header>
   )
 }
