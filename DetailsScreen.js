@@ -8,7 +8,7 @@ class DetailsScreen extends React.Component {
         <Text>Add details here!</Text>
 
         <Button
-          title="Back to home!"
+          title="Back to home"
           onPress={() =>
             this.props.navigation.navigate('Home')
           }
