@@ -1,14 +1,17 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import {Appbar} from 'react-native-paper';
+import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from '../pages/HomeScreen';
 import DetailsScreen from '../pages/DetailsScreen';
 import Login from '../pages/Login';
+import ClientHome from '../pages/ClientHome';
 
 const Stack = createStackNavigator();
+const Tab = createMaterialBottomTabNavigator();
 
-const loginType = null;
+const loginType = 'user';
 
 function CustomNavigationBar({navigation, previous}) {
   return (
@@ -45,14 +48,9 @@ function Routes() {
 
 function UserNavigation() {
   return (
-    <Bottom.Navigator
-      initialRouteName="Home"
-      screenOptions={{
-        header: props => <CustomNavigationBar {...props} />,
-      }}>
-      <Bottom.Screen name="Home" component={HomeScreen} />
-      <Bottom.Screen name="Details" component={DetailsScreen} />
-    </Bottom.Navigator>
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={ClientHome} />
+    </Tab.Navigator>
   );
 }
 
