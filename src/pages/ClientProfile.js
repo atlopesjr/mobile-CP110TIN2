@@ -1,14 +1,14 @@
 import React from 'react';
 import {StyleSheet, Text, View, Button} from 'react-native';
+import {UseUserData} from '../context/userContext';
 
-const DetailsScreen = ({navigation}) => {
+const ClientProfile = () => {
+  const {setUserType} = UseUserData();
+
   return (
     <View style={styles.container}>
-      <Text>Add details here!</Text>
-      <Button
-        title="Back to home"
-        onPress={() => navigation.navigate('ClientHome')}
-      />
+      <Text>Client Profile!</Text>
+      <Button title="Logoff" onPress={() => setUserType(null)} />
     </View>
   );
 };
@@ -22,4 +22,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DetailsScreen;
+export default ClientProfile;
