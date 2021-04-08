@@ -1,10 +1,10 @@
 import React from 'react';
 import {StyleSheet, Text, View, Button} from 'react-native';
 
-const DetailsScreen = ({navigation}) => {
+const MyLoads = () => {
   return (
     <View style={styles.container}>
-      <Text>Add details here!</Text>
+      <Text>My Loads!</Text>
     </View>
   );
 };
@@ -18,4 +18,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DetailsScreen;
+export default MyLoads;

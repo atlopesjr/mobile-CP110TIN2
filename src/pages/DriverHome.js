@@ -1,10 +1,14 @@
 import React from 'react';
 import {StyleSheet, Text, View, Button} from 'react-native';
 
-const DetailsScreen = ({navigation}) => {
+const DriverHome = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <Text>Add details here!</Text>
+      <Text>Home!</Text>
+      <Button
+        title="Details"
+        onPress={() => navigation.navigate('DetailsScreen')}
+      />
     </View>
   );
 };
@@ -18,4 +22,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DetailsScreen;
+export default DriverHome;

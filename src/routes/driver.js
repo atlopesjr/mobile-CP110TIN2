@@ -4,9 +4,9 @@ import {Appbar} from 'react-native-paper';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
 import DetailsScreen from '../pages/DetailsScreen';
-import ClientHome from '../pages/ClientHome';
-import MySends from '../pages/MySends';
-import ClientProfile from '../pages/ClientProfile';
+import DriverHome from '../pages/DriverHome';
+import MyLoads from '../pages/MyLoads';
+import DriverProfile from '../pages/DriverProfile';
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -23,28 +23,28 @@ function CustomNavigationBar({navigation, previous}) {
 function DriverNavigation() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={ClientStack} />
-      <Tab.Screen name="MySends" component={MySends} />
+      <Tab.Screen name="Home" component={DriverStack} />
+      <Tab.Screen name="MyLoads" component={MyLoads} />
       <Tab.Screen
-        name="ClientProfile"
+        name="DriverProfile"
         options={{title: 'Profile'}}
-        component={ClientProfile}
+        component={DriverProfile}
       />
     </Tab.Navigator>
   );
 }
 
-function ClientStack() {
+function DriverStack() {
   return (
     <Stack.Navigator
-      initialRouteName="ClientHome"
+      initialRouteName="DriverHome"
       screenOptions={{
         header: props => <CustomNavigationBar {...props} />,
       }}>
       <Stack.Screen
-        name="ClientHome"
+        name="DriverHome"
         options={{headerShown: false}}
-        component={ClientHome}
+        component={DriverHome}
       />
       <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
     </Stack.Navigator>
