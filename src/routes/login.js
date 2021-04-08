@@ -5,6 +5,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from '../pages/HomeScreen';
 import DetailsScreen from '../pages/DetailsScreen';
 import Login from '../pages/Login';
+import RegisterUser from '../pages/RegisterUser';
+import PassRecovery from '../pages/PassRecovery';
 
 const Stack = createStackNavigator();
 
@@ -12,7 +14,7 @@ function CustomNavigationBar({navigation, previous}) {
   return (
     <Appbar.Header>
       {previous ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
-      <Appbar.Content title="Frete app" />
+      <Appbar.Content title="Box Finder" />
     </Appbar.Header>
   );
 }
@@ -30,6 +32,8 @@ function LoginNavigation() {
         component={Login}
       />
       <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="RegisterUser" component={RegisterUser} />
+      <Stack.Screen name="PassRecovery" component={PassRecovery} />
       <Stack.Screen name="Details" component={DetailsScreen} />
     </Stack.Navigator>
   );

@@ -7,9 +7,25 @@ const Login = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text>You have (undefined) details.</Text>
-      <Button title="Login as User" onPress={() => setUserType('user')} />
-      <Button title="Login as Driver" onPress={() => setUserType('driver')} />
+      <Text>Login Page!</Text>
+      <View style={styles.btnStyle}>
+        <Button
+          title="Register User"
+          onPress={() => navigation.navigate('RegisterUser')}
+        />
+      </View>
+      <View style={styles.btnStyle}>
+        <Button
+          title="Recovery Password"
+          onPress={() => navigation.navigate('PassRecovery')}
+        />
+      </View>
+      <View style={styles.btnStyle}>
+        <Button title="Login as User" onPress={() => setUserType('user')} />
+      </View>
+      <View style={styles.btnStyle}>
+        <Button title="Login as Driver" onPress={() => setUserType('driver')} />
+      </View>
     </View>
   );
 };
@@ -20,6 +36,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  btnStyle: {
+    marginTop: 5,
   },
 });
 
