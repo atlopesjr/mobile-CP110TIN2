@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View, Button} from 'react-native';
 import {UseUserData} from '../context/userContext';
+import auth from '@react-native-firebase/auth';
 
 const DriverProfile = () => {
   const {setUserType} = UseUserData();
@@ -8,7 +9,16 @@ const DriverProfile = () => {
   return (
     <View style={styles.container}>
       <Text>Driver Profile!</Text>
-      <Button title="Logoff" onPress={() => setUserType(null)} />
+      <Button
+        title="Logoff"
+        onPress={() => {
+          auth()
+            .signOut()
+            .then(() => {})
+            .catch(() => console.log('Falha ao deslogar'));
+          setUserType(null);
+        }}
+      />
     </View>
   );
 };

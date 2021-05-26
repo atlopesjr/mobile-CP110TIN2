@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "593625499087",
+    "project_id": "box-finder-app",
+    "storage_bucket": "box-finder-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:593625499087:android:cf0a3d48ff1368c9aabeba",
+        "android_client_info": {
+          "package_name": "com.appfrete"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "593625499087-upcgpajohsmqpjt9okq6s3ubueq4d7d3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxEhe7vTQSBoZfCpI3P9584m8igNKL8mg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "593625499087-upcgpajohsmqpjt9okq6s3ubueq4d7d3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
