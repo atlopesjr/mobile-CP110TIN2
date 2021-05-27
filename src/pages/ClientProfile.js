@@ -5,12 +5,13 @@ import auth from '@react-native-firebase/auth';
 
 const ClientProfile = () => {
   const {setUserType} = UseUserData();
+  const {userData} = UseUserData();
 
   return (
     <View style={styles.container}>
-      <Text>Client Profile!</Text>
+      <Text>{userData.name} Profile!</Text>
       <Button
-        title="Logoff"
+        title="Log Out"
         onPress={() => {
           auth()
             .signOut()

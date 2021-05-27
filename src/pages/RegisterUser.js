@@ -11,38 +11,42 @@ const RegisterUser = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        style={{width: 400, height: 80}}
-        label="Email"
-        value={email}
-        onChangeText={text => setEmail(text)}
-      />
-
-      <TextInput
-        style={{width: 400, height: 80}}
-        label="Password"
-        value={password}
-        onChangeText={text => setPassword(text)}
-      />
-
-      <Button
-        title="Register User"
-        onPress={() => {
-          setLoading(true);
-
-          auth()
-            .createUserWithEmailAndPassword(email, password)
-            .then(() => {
-              setLoading(false);
-            })
-            .catch(() => {
-              console.log('Erro ao criar conta');
-              setLoading(false);
-            });
-        }}
-      />
-
       <Text>Register User!</Text>
+
+      <View style={styles.inputStyle}>
+        <TextInput
+          label="Email"
+          value={email}
+          onChangeText={text => setEmail(text)}
+        />
+      </View>
+
+      <View style={styles.inputStyle}>
+        <TextInput
+          label="Password"
+          value={password}
+          onChangeText={text => setPassword(text)}
+        />
+      </View>
+
+      <View style={styles.btnStyle}>
+        <Button
+          title="Register User"
+          onPress={() => {
+            setLoading(true);
+
+            auth()
+              .createUserWithEmailAndPassword(email, password)
+              .then(() => {
+                setLoading(false);
+              })
+              .catch(() => {
+                console.log('Erro ao criar conta');
+                setLoading(false);
+              });
+          }}
+        />
+      </View>
     </View>
   );
 };
@@ -53,6 +57,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  btnStyle: {
+    marginTop: 2,
+    width: 400,
+    height: 50,
+  },
+  inputStyle: {
+    width: 400,
+    height: 80,
   },
 });
 

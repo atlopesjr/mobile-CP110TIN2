@@ -8,41 +8,44 @@ import auth from '@react-native-firebase/auth';
 const FinishRegister = ({navigation}) => {
   const {setUserType, user} = UseUserData();
   const [name, setName] = useState('');
-  const [celphone, setCelphone] = useState('');
+  const [cellphone, setCellphone] = useState('');
   const [checked, setChecked] = useState('');
 
   const finishRegisterFunction = async () => {
     await firestore()
       .collection('Users')
       .doc(user.uid)
-      .set({name: name, celphone: celphone, userType: checked});
+      .set({name: name, cellphone: cellphone, userType: checked});
 
     setUserType(checked);
   };
 
   return (
     <View style={styles.container}>
-      <Text>Login Page!</Text>
-      <TextInput
-        style={{width: 400, height: 80}}
-        label="Name"
-        value={name}
-        onChangeText={text => setName(text)}
-      />
+      <View style={styles.inputStyle}>
+        <TextInput
+          label="Full Name"
+          value={name}
+          onChangeText={text => setName(text)}
+        />
+      </View>
 
-      <TextInput
-        style={{width: 400, height: 80}}
-        label="Celphone"
-        value={celphone}
-        onChangeText={text => setCelphone(text)}
-      />
+      <View style={styles.inputStyle}>
+        <TextInput
+          label="Cellphone"
+          value={cellphone}
+          onChangeText={text => setCellphone(text)}
+        />
+      </View>
 
+      <Text>Sender:</Text>
       <RadioButton
         value="user"
         status={checked === 'user' ? 'checked' : 'unchecked'}
         onPress={() => setChecked('user')}
       />
 
+      <Text>Driver:</Text>
       <RadioButton
         value="driver"
         status={checked === 'driver' ? 'checked' : 'unchecked'}
@@ -51,13 +54,10 @@ const FinishRegister = ({navigation}) => {
 
       <View style={styles.btnStyle}>
         <Button
-          title="Finish register"
+          title="Finish Register!"
           onPress={() => finishRegisterFunction()}
         />
       </View>
-      {/* <View style={styles.btnStyle}>
-        <Button title="Login as Driver" onPress={() => setUserType('driver')} />
-      </View> */}
     </View>
   );
 };
@@ -70,7 +70,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   btnStyle: {
-    marginTop: 5,
+    marginTop: 2,
+    width: 400,
+    height: 50,
+  },
+  inputStyle: {
+    width: 400,
+    height: 80,
   },
 });
 

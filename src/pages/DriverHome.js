@@ -7,7 +7,7 @@ const DriverHome = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text>Home! olá {userData.name}</Text>
+      <Text> Hello {userData.name}!</Text>
       <Button
         title="Details"
         onPress={() => navigation.navigate('DetailsScreen')}

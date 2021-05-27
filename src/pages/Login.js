@@ -11,36 +11,27 @@ const Login = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text>Login Page!</Text>
-      <TextInput
-        style={{width: 400, height: 80}}
-        label="Email"
-        value={email}
-        onChangeText={text => setEmail(text)}
-      />
+      <Text>BOX FINDER</Text>
 
-      <TextInput
-        style={{width: 400, height: 80}}
-        label="Password"
-        value={password}
-        onChangeText={text => setPassword(text)}
-      />
-
-      <View style={styles.btnStyle}>
-        <Button
-          title="Register User"
-          onPress={() => navigation.navigate('RegisterUser')}
+      <View style={styles.inputStyle}>
+        <TextInput
+          label="Email"
+          value={email}
+          onChangeText={text => setEmail(text)}
         />
       </View>
-      <View style={styles.btnStyle}>
-        <Button
-          title="Recovery Password"
-          onPress={() => navigation.navigate('PassRecovery')}
+
+      <View style={styles.inputStyle}>
+        <TextInput
+          label="Password"
+          value={password}
+          onChangeText={text => setPassword(text)}
         />
       </View>
+
       <View style={styles.btnStyle}>
         <Button
-          title="Login as User"
+          title="LOGIN"
           onPress={() => {
             auth()
               .signInWithEmailAndPassword(email, password)
@@ -49,8 +40,19 @@ const Login = ({navigation}) => {
           }}
         />
       </View>
+
+      <View style={styles.btnStyle}>
+        <Button
+          title="Sign Up"
+          onPress={() => navigation.navigate('RegisterUser')}
+        />
+      </View>
+
       {/* <View style={styles.btnStyle}>
-        <Button title="Login as Driver" onPress={() => setUserType('driver')} />
+        <Button
+          title="Recovery Password"
+          onPress={() => navigation.navigate('PassRecovery')}
+        />
       </View> */}
     </View>
   );
@@ -64,7 +66,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   btnStyle: {
-    marginTop: 5,
+    marginTop: 2,
+    width: 400,
+    height: 50,
+  },
+  inputStyle: {
+    width: 400,
+    height: 80,
   },
 });
 
