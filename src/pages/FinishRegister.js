@@ -6,7 +6,7 @@ import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 
 const FinishRegister = ({navigation}) => {
-  const {setUserType, user} = UseUserData();
+  const {setUserType, getUserData, user} = UseUserData();
   const [name, setName] = useState('');
   const [cellphone, setCellphone] = useState('');
   const [checked, setChecked] = useState('');
@@ -16,14 +16,14 @@ const FinishRegister = ({navigation}) => {
       .collection('Users')
       .doc(user.uid)
       .set({name: name, cellphone: cellphone, userType: checked});
-
-    setUserType(checked);
+    getUserData();
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.inputStyle}>
         <TextInput
+          style={{width: '100%', height: 60}}
           label="Full Name"
           value={name}
           onChangeText={text => setName(text)}
@@ -32,6 +32,7 @@ const FinishRegister = ({navigation}) => {
 
       <View style={styles.inputStyle}>
         <TextInput
+          style={{width: '100%', height: 60}}
           label="Cellphone"
           value={cellphone}
           onChangeText={text => setCellphone(text)}
@@ -70,13 +71,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   btnStyle: {
-    marginTop: 2,
-    width: 400,
-    height: 50,
+    width: '90%',
+    paddingTop: 10,
+    justifyContent: 'center',
   },
   inputStyle: {
-    width: 400,
-    height: 80,
+    width: '90%',
+    paddingBottom: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  logoStyle: {
+    paddingBottom: 10,
   },
 });
 

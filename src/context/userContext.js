@@ -7,12 +7,20 @@ const UserContext = createContext({
   setUserType: () => null,
   user: null,
   userData: null,
+  getUserData: null,
 });
 
 export const UserProvider = ({children}) => {
   const [userType, setUserType] = useState(null);
   const [user, setUser] = useState(null);
   const [userData, setUserData] = useState(null);
+
+  const getUserData = async () => {
+    const userDoc = await firestore().collection('Users').doc(user.uid).get();
+    const userDataAux = userDoc.data();
+    setUserData(userDataAux);
+    setUserType(userDataAux.userType);
+  };
 
   const onAuthStateChanged = async user => {
     if (user) {
@@ -26,6 +34,8 @@ export const UserProvider = ({children}) => {
         setUserData(null);
       }
     } else {
+      setUser(null);
+      setUserType(null);
       setUserData(null);
     }
 
@@ -50,6 +60,7 @@ export const UserProvider = ({children}) => {
         setUserType: setUserType,
         user: user,
         userData: userData,
+        getUserData: getUserData,
       }}>
       {children}
     </UserContext.Provider>

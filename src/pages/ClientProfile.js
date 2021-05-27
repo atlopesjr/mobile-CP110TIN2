@@ -4,7 +4,6 @@ import {UseUserData} from '../context/userContext';
 import auth from '@react-native-firebase/auth';
 
 const ClientProfile = () => {
-  const {setUserType} = UseUserData();
   const {userData} = UseUserData();
 
   return (
@@ -17,7 +16,6 @@ const ClientProfile = () => {
             .signOut()
             .then(() => {})
             .catch(() => console.log('Falha ao deslogar'));
-          setUserType(null);
         }}
       />
     </View>

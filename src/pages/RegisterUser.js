@@ -11,10 +11,13 @@ const RegisterUser = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text>Register User!</Text>
+      <View style={styles.logoStyle}>
+        <Text>Register User!</Text>
+      </View>
 
       <View style={styles.inputStyle}>
         <TextInput
+          style={{width: '100%', height: 60}}
           label="Email"
           value={email}
           onChangeText={text => setEmail(text)}
@@ -23,6 +26,7 @@ const RegisterUser = ({navigation}) => {
 
       <View style={styles.inputStyle}>
         <TextInput
+          style={{width: '100%', height: 60}}
           label="Password"
           value={password}
           onChangeText={text => setPassword(text)}
@@ -59,13 +63,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   btnStyle: {
-    marginTop: 2,
-    width: 400,
-    height: 50,
+    width: '90%',
+    paddingTop: 10,
+    justifyContent: 'center',
   },
   inputStyle: {
-    width: 400,
-    height: 80,
+    width: '90%',
+    paddingBottom: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  logoStyle: {
+    paddingBottom: 10,
   },
 });
 
