@@ -2,6 +2,7 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import {Appbar} from 'react-native-paper';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {createStackNavigator} from '@react-navigation/stack';
 import DetailsScreen from '../pages/DetailsScreen';
 import ClientHome from '../pages/ClientHome';
@@ -27,8 +28,13 @@ function UserNavigation() {
       <Tab.Screen name="MySends" component={MySends} />
       <Tab.Screen
         name="ClientProfile"
-        options={{title: 'Profile'}}
         component={ClientProfile}
+        options={{
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({color}) => (
+            <MaterialCommunityIcons name="account" color={color} size={26} />
+          ),
+        }}
       />
     </Tab.Navigator>
   );

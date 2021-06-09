@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, Button} from 'react-native';
 import {UseUserData} from '../context/userContext';
-import {TextInput, RadioButton} from 'react-native-paper';
+import {TextInput, Checkbox} from 'react-native-paper';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 
@@ -10,23 +10,58 @@ const FinishRegister = ({navigation}) => {
   const [name, setName] = useState('');
   const [cellphone, setCellphone] = useState('');
   const [checked, setChecked] = useState('');
+  const [error, setError] = useState('');
+  const [isValid, setValid] = useState(false);
+  const [visible, setVisible] = useState(false);
 
-  const finishRegisterFunction = async () => {
-    await firestore()
-      .collection('Users')
-      .doc(user.uid)
-      .set({name: name, cellphone: cellphone, userType: checked});
-    getUserData();
+  const verifyFinishRegister = () => {
+    if (!name) {
+      setError('Name required *');
+      setValid(false);
+      return;
+    } else if (!cellphone && !cellphone.trim()) {
+      setError('Cellphone required *');
+      setValid(false);
+      return;
+    } else if (!checked) {
+      setError('User Type required *');
+      setValid(false);
+      return;
+    }
+    finishRegisterFunction(name, cellphone, checked);
+  };
+
+  const finishRegisterFunction = async (name, cellphone, checked) => {
+    try {
+      let response = await firestore()
+        .collection('Users')
+        .doc(user.uid)
+        .set({name: name, cellphone: cellphone, userType: checked});
+      getUserData();
+      if (response && response.user) {
+        console.log('cadastro finalizado');
+      }
+    } catch (e) {
+      console.log('erro ao finalizar');
+    }
   };
 
   return (
     <View style={styles.container}>
+      <View style={styles.logoStyle}>
+        <Text>Finish Register User!</Text>
+      </View>
+
       <View style={styles.inputStyle}>
         <TextInput
           style={{width: '100%', height: 60}}
           label="Full Name"
           value={name}
-          onChangeText={text => setName(text)}
+          onChangeText={text => {
+            setError;
+            setName(text);
+          }}
+          error={isValid}
         />
       </View>
 
@@ -35,29 +70,37 @@ const FinishRegister = ({navigation}) => {
           style={{width: '100%', height: 60}}
           label="Cellphone"
           value={cellphone}
-          onChangeText={text => setCellphone(text)}
+          onChangeText={text => {
+            setError;
+            setCellphone(text);
+          }}
+          error={isValid}
         />
       </View>
 
-      <Text>Sender:</Text>
-      <RadioButton
-        value="user"
-        status={checked === 'user' ? 'checked' : 'unchecked'}
-        onPress={() => setChecked('user')}
-      />
+      <View style={styles.createSection}>
+        <Text>Sender:</Text>
+        <Checkbox
+          value="user"
+          status={checked === 'user' ? 'checked' : 'unchecked'}
+          onPress={() => setChecked('user')}
+        />
+        <Text>Driver:</Text>
+        <Checkbox
+          value="driver"
+          status={checked === 'driver' ? 'checked' : 'unchecked'}
+          onPress={() => setChecked('driver')}
+        />
+      </View>
 
-      <Text>Driver:</Text>
-      <RadioButton
-        value="driver"
-        status={checked === 'driver' ? 'checked' : 'unchecked'}
-        onPress={() => setChecked('driver')}
-      />
+      {error ? (
+        <View style={styles.errorLabelContainerStyle}>
+          <Text style={styles.errorTextStyle}>{error}</Text>
+        </View>
+      ) : null}
 
       <View style={styles.btnStyle}>
-        <Button
-          title="Finish Register!"
-          onPress={() => finishRegisterFunction()}
-        />
+        <Button title="Finish Register!" onPress={verifyFinishRegister} />
       </View>
     </View>
   );
@@ -83,6 +126,18 @@ const styles = StyleSheet.create({
   },
   logoStyle: {
     paddingBottom: 10,
+  },
+  errorLabelContainerStyle: {
+    flex: 0.1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  errorTextStyle: {
+    color: 'red',
+    textAlign: 'center',
+  },
+  createSection: {
+    flexDirection: 'row',
   },
 });
 

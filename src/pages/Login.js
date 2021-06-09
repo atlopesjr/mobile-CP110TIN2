@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, Button, Alert} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  Alert,
+  TouchableOpacity,
+} from 'react-native';
 import {UseUserData} from '../context/userContext';
 import {TextInput, Snackbar} from 'react-native-paper';
 import auth from '@react-native-firebase/auth';
@@ -11,6 +18,7 @@ const Login = ({navigation}) => {
   const [error, setError] = useState('');
   const [isValid, setValid] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [isSecureEntry, setIsSecureEntry] = useState(true);
   const onToggleSnackBar = () => setVisible(!visible);
   const onDismissSnackBar = () => setVisible(false);
 
@@ -31,7 +39,8 @@ const Login = ({navigation}) => {
     try {
       let response = await auth().signInWithEmailAndPassword(email, password);
       if (response && response.user) {
-        Alert.alert('Success', 'Authenticated successfully.');
+        //Alert.alert('Success', 'Authenticated successfully.');
+        console.log('autenticado.');
       }
     } catch (e) {
       onToggleSnackBar();
@@ -60,8 +69,16 @@ const Login = ({navigation}) => {
       <View style={styles.inputStyle}>
         <TextInput
           style={{width: '100%', height: 60}}
-          secureTextEntry
+          secureTextEntry={isSecureEntry}
           label="Password"
+          right={
+            <TextInput.Icon
+              name={isSecureEntry ? 'eye' : 'eye-off'}
+              onPress={() => {
+                setIsSecureEntry(prev => !prev);
+              }}
+            />
+          }
           value={password}
           error={isValid}
           onChangeText={text => setPassword(text)}
@@ -78,11 +95,11 @@ const Login = ({navigation}) => {
         <Button title="LOGIN" onPress={verifySignIn} />
       </View>
 
-      <View style={styles.btnStyle}>
-        <Button
-          title="Sign Up"
-          onPress={() => navigation.navigate('RegisterUser')}
-        />
+      <View style={styles.createSection}>
+        <Text style={styles.infoText}>Need a new account? </Text>
+        <TouchableOpacity onPress={() => navigation.navigate('RegisterUser')}>
+          <Text style={styles.linkBtn}>Register</Text>
+        </TouchableOpacity>
       </View>
 
       <Snackbar
@@ -136,6 +153,18 @@ const styles = StyleSheet.create({
   errorTextStyle: {
     color: 'red',
     textAlign: 'center',
+  },
+  createSection: {
+    flexDirection: 'row',
+    paddingTop: '5%',
+  },
+  linkBtn: {
+    paddingLeft: '0.5%',
+    color: '#0645ad',
+    fontSize: 16,
+  },
+  infoText: {
+    fontSize: 16,
   },
 });
 
