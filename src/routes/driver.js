@@ -2,6 +2,7 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import {Appbar} from 'react-native-paper';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {createStackNavigator} from '@react-navigation/stack';
 import DetailsScreen from '../pages/DetailsScreen';
 import DriverHome from '../pages/DriverHome';
@@ -23,12 +24,39 @@ function CustomNavigationBar({navigation, previous}) {
 function DriverNavigation() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={DriverStack} />
-      <Tab.Screen name="MyLoads" component={MyLoads} />
+      <Tab.Screen
+        name="Home"
+        component={DriverStack}
+        options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: ({color}) => (
+            <MaterialCommunityIcons name="home" color={color} size={24} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="MyLoads"
+        component={MyLoads}
+        options={{
+          tabBarLabel: 'My Loads',
+          tabBarIcon: ({color}) => (
+            <MaterialCommunityIcons
+              name="cube-outline"
+              color={color}
+              size={24}
+            />
+          ),
+        }}
+      />
       <Tab.Screen
         name="DriverProfile"
-        options={{title: 'Profile'}}
         component={DriverProfile}
+        options={{
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({color}) => (
+            <MaterialCommunityIcons name="account" color={color} size={24} />
+          ),
+        }}
       />
     </Tab.Navigator>
   );

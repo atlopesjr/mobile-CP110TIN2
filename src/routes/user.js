@@ -8,6 +8,7 @@ import DetailsScreen from '../pages/DetailsScreen';
 import ClientHome from '../pages/ClientHome';
 import MySends from '../pages/MySends';
 import ClientProfile from '../pages/ClientProfile';
+import QuoteScreen from '../pages/QuoteScreen';
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -24,15 +25,33 @@ function CustomNavigationBar({navigation, previous}) {
 function UserNavigation() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={ClientStack} />
-      <Tab.Screen name="MySends" component={MySends} />
+      <Tab.Screen
+        name="Home"
+        component={ClientStack}
+        options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: ({color}) => (
+            <MaterialCommunityIcons name="home" color={color} size={24} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="MySends"
+        component={MySends}
+        options={{
+          tabBarLabel: 'My Sends',
+          tabBarIcon: ({color}) => (
+            <MaterialCommunityIcons name="cube-send" color={color} size={24} />
+          ),
+        }}
+      />
       <Tab.Screen
         name="ClientProfile"
         component={ClientProfile}
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({color}) => (
-            <MaterialCommunityIcons name="account" color={color} size={26} />
+            <MaterialCommunityIcons name="account" color={color} size={24} />
           ),
         }}
       />
@@ -53,6 +72,7 @@ function ClientStack() {
         component={ClientHome}
       />
       <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
+      <Stack.Screen name="QuoteScreen" component={QuoteScreen} />
     </Stack.Navigator>
   );
 }
